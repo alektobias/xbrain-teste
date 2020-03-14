@@ -1,12 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from '~/pages/Home/index.';
+import Products from '~/pages/Products';
+
+import { Container } from './styles';
 
 export default function routes() {
 	return (
-		<Switch>
-			<Route path="/" component={Home} exact />
-		</Switch>
+		<Container>
+			<Switch>
+				<Route path="/" component={Products} exact />
+			</Switch>
+		</Container>
 	);
 }
