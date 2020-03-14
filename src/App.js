@@ -1,5 +1,5 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
+// import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -27,4 +27,4 @@ function App() {
 	);
 }
 
-export default hot(App);
+export default App;
