@@ -9,7 +9,7 @@ import { Container, Message, NewPurchaseButton } from './styles';
 export default function Confirmation() {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { price } = useLocation().state;
+	const { price } = useLocation()?.state;
 	const { name } = useSelector(state => state.user);
 
 	function handleNewPurchase() {
@@ -23,7 +23,7 @@ export default function Confirmation() {
 				<div>
 					<h3>{name},</h3>
 					<p>
-						Sua compra no valor de <strong>{price}</strong> foi finalizada com
+						Sua compra no valor de <strong>{price || 'R$ 0,00'}</strong> foi finalizada com
 						sucesso
 					</p>
 				</div>

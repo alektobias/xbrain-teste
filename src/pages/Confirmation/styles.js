@@ -8,6 +8,9 @@ export const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	@media (max-width: 320px) {
+		background-color: #ffffff;
+	}
 `;
 export const Message = styled.div`
 	background-color: #ffffff;
@@ -38,6 +41,10 @@ export const Message = styled.div`
 		font-weight: bold;
 		color: #fff;
 		background-color: #ff9800;
+	}
+
+	@media (max-width: 320px) {
+		padding: 0 40px;
 	}
 `;
 export const NewPurchaseButton = styled(Button).attrs({
