@@ -5,6 +5,9 @@ export const Container = styled.div`
 	max-width: 1140px;
 	margin-top: 64px;
 	width: 100%;
+	@media (max-width: 720px) {
+		margin: 32px 8px 0 8px;
+	}
 `;
 export const Header = styled.h2`
 	font-size: 24px;
@@ -15,11 +18,17 @@ export const Header = styled.h2`
 `;
 
 export const ProductsGrid = styled.div`
-	margin-top: 46px;
+	margin-top: 48px;
 	margin-bottom: 80px;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 16px;
+	@media (max-width: 720px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media (max-width: 320px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 `;
 export const Client = styled.form`
 	margin-top: 24px;

@@ -70,12 +70,20 @@ export const Controller = styled.form`
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			@media (max-width: 720px) {
+				min-width: 35px;
+				width: 35px;
+				height: 35px;
+			}
 		}
 		input {
 			width: 127px;
 			border-radius: 5px;
 			border: 1px solid ${props => props.theme.colors.divider};
 			text-align: center;
+			@media (max-width: 720px) {
+				width: 100px;
+			}
 		}
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {

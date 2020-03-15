@@ -21,7 +21,7 @@ export default function Product({ data }) {
 	const { products } = useSelector(state => state.cart);
 	const { id, photo, title, price } = data;
 
-	const [count, setCount] = useState(products[id].count || 0);
+	const [count, setCount] = useState(products[id]?.count || 0);
 	const [controller, setController] = useState(false);
 
 	function handleSubmit(e) {
