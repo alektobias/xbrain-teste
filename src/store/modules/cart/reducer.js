@@ -15,6 +15,10 @@ export default function cart(state = INITIAL_STATE, action) {
 				draft.products[payload.id] = { count: payload.count };
 				break;
 			}
+			case Types.CLEAR_CART: {
+				draft.products = {};
+				break;
+			}
 			default:
 				break;
 		}

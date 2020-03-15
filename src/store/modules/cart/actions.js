@@ -6,3 +6,8 @@ export function addItem({ id, count }) {
 		payload: { id, count },
 	};
 }
+export function clearCart() {
+	return {
+		type: Types.CLEAR_CART,
+	};
+}
