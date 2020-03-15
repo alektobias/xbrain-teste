@@ -1,5 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import ClientForm from '~/components/ClientForm';
 import Product from '~/components/Product';
@@ -16,6 +17,7 @@ import {
 } from './styles';
 
 export default function Products() {
+	const history = useHistory();
 	const { products: cartProducts } = useSelector(state => state.cart);
 
 	const formRef = useRef(null);
@@ -37,6 +39,11 @@ export default function Products() {
 		}).format(totalValue);
 	}, [cartProducts]);
 
+	function handlePurchase() {
+		formRef.current.submit();
+		history.push('/confirmation', { price: totalPrice });
+	}
+
 	return (
 		<Container>
 			<Header>Produtos</Header>
@@ -50,9 +57,7 @@ export default function Products() {
 				<ClientForm ref={formRef} />
 				<Total>
 					<TotalPrice>{totalPrice}</TotalPrice>
-					<FinishButton onClick={() => formRef.current.submit()}>
-						FINALIZAR COMPRA
-					</FinishButton>
+					<FinishButton onClick={handlePurchase}>FINALIZAR COMPRA</FinishButton>
 				</Total>
 			</Client>
 		</Container>
