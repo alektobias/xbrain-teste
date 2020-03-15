@@ -1,3 +1,3 @@
 export default {
-	EXAMPLE: '@user/EXAMPLE',
+	SET_USER: '@user/SET_USER',
 };

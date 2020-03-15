@@ -1,6 +1,9 @@
 import React, { useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
+
+import { addItem } from '~/store/modules/cart/actions';
 
 import {
 	Container,
@@ -14,13 +17,18 @@ import {
 } from './styles';
 
 export default function Product({ data }) {
-	const [count, setCount] = useState(0);
+	const dispatch = useDispatch();
+	const { products } = useSelector(state => state.cart);
+	const { id, photo, title, price } = data;
+
+	const [count, setCount] = useState(products[id].count || 0);
 	const [controller, setController] = useState(false);
+
 	function handleSubmit(e) {
 		e.preventDefault();
+		dispatch(addItem({ id, count }));
 		setController(false);
 	}
-	const { photo, title, price } = data;
 
 	const formattedPrice = useMemo(
 		() =>
@@ -84,5 +92,6 @@ Product.propTypes = {
 		photo: PropTypes.string.isRequired,
 		title: PropTypes.string.isRequired,
 		price: PropTypes.number.isRequired,
+		id: PropTypes.number.isRequired,
 	}).isRequired,
 };

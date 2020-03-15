@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-
+import ClientForm from '~/components/ClientForm';
 import Product from '~/components/Product';
 import products from '~/data/products';
 
@@ -11,13 +9,34 @@ import {
 	Container,
 	Header,
 	ProductsGrid,
-	ClientForm,
+	Client,
 	Total,
 	TotalPrice,
 	FinishButton,
 } from './styles';
 
 export default function Products() {
+	const { products: cartProducts } = useSelector(state => state.cart);
+
+	const formRef = useRef(null);
+
+	const totalPrice = useMemo(() => {
+		const partialValues = Object.keys(cartProducts).map(id => {
+			const qtd = cartProducts[id].count;
+			const productPrice = products.find(product => product.id === Number(id))
+				.price;
+			return qtd * productPrice;
+		});
+		const totalValue = partialValues.reduce(
+			(prev, current) => prev + current,
+			0
+		);
+		return new Intl.NumberFormat('pt-BR', {
+			style: 'currency',
+			currency: 'BRL',
+		}).format(totalValue);
+	}, [cartProducts]);
+
 	return (
 		<Container>
 			<Header>Produtos</Header>
@@ -27,29 +46,15 @@ export default function Products() {
 				))}
 			</ProductsGrid>
 			<Header>Dados do Cliente</Header>
-			<ClientForm>
-				<TextField
-					label="Nome"
-					placeholder="Nome do cliente aqui"
-					variant="outlined"
-					required
-				/>
-				<TextField
-					label="Email"
-					placeholder="Digite seu email aqui"
-					variant="outlined"
-					required
-				/>
-				<Select label="Sexo" variant="outlined" placeholder="Selecione">
-					<MenuItem value="m">Masculino</MenuItem>
-					<MenuItem value="f">Feminino</MenuItem>
-					<MenuItem value="o">Outro</MenuItem>
-				</Select>
-			</ClientForm>
-			<Total>
-				<TotalPrice> R$ 654564</TotalPrice>
-				<FinishButton>FINALIZAR COMPRA</FinishButton>
-			</Total>
+			<Client>
+				<ClientForm ref={formRef} />
+				<Total>
+					<TotalPrice>{totalPrice}</TotalPrice>
+					<FinishButton onClick={() => formRef.current.submit()}>
+						FINALIZAR COMPRA
+					</FinishButton>
+				</Total>
+			</Client>
 		</Container>
 	);
 }

@@ -21,11 +21,8 @@ export const ProductsGrid = styled.div`
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 16px;
 `;
-export const ClientForm = styled.form`
+export const Client = styled.form`
 	margin-top: 24px;
-	display: grid;
-	grid-template-columns: 5fr 5fr 2fr;
-	grid-gap: 16px;
 `;
 
 export const Total = styled.div`

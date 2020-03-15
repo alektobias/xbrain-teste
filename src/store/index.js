@@ -5,9 +5,9 @@ import storage from 'redux-persist/lib/storage';
 import RootReducer from './modules/rootReducer';
 
 const persistConfig = {
-	key: 'YOUR_SECRET_KEY',
+	key: 'XBRAIN_SECRET',
 	storage,
-	whitelist: [],
+	whitelist: ['user'],
 };
 
 const store = createStore(persistReducer(persistConfig, RootReducer));

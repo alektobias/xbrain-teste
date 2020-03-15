@@ -1,8 +1,8 @@
 import Types from './types';
 
-export function actionExample() {
+export function setUser({ name, email, gender }) {
 	return {
-		type: Types.EXAMPLE,
-		payload: {},
+		type: Types.SET_USER,
+		payload: { name, email, gender },
 	};
 }
