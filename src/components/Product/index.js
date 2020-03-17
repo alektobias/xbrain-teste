@@ -14,8 +14,7 @@ import {
 	SplitPrice,
 	Controller,
 	ControllerButton,
-	ControllerSubmit,
-	CancelButton
+	ControllerSubmit
 } from './styles';
 
 export default function Product({ data }) {
