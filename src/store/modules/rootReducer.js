@@ -3,6 +3,6 @@ import { combineReducers } from 'redux';
 import cart from './cart/reducer';
 import user from './user/reducer';
 
-const reducers = combineReducers({ user, cart });
+const reducers = combineReducers({ cart, user });
 
 export default reducers;

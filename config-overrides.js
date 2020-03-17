@@ -2,13 +2,10 @@
 const { addBabelPlugin, override } = require('customize-cra');
 
 module.exports = override(
-	addBabelPlugin(
-		[
-			'babel-plugin-root-import',
-			{
-				rootPathSuffix: 'src',
-			},
-		],
-		'react-hot-loader/babel'
-	)
+	addBabelPlugin([
+		'babel-plugin-root-import',
+		{
+			rootPathSuffix: 'src',
+		},
+	])
 );

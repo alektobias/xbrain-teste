@@ -1,6 +1,5 @@
 import React, { useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import ClientForm from '~/components/ClientForm';
 import Product from '~/components/Product';
@@ -17,7 +16,6 @@ import {
 } from './styles';
 
 export default function Products() {
-	const history = useHistory();
 	const { products: cartProducts } = useSelector(state => state.cart);
 
 	const formRef = useRef(null);
@@ -41,7 +39,6 @@ export default function Products() {
 
 	function handlePurchase() {
 		formRef.current.submit();
-		history.push('/confirmation', { price: totalPrice });
 	}
 
 	return (

@@ -1,35 +1,26 @@
 import React, {
 	useState,
-	useEffect,
 	useImperativeHandle,
 	forwardRef,
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { FormControl, TextField, Select, InputLabel } from '@material-ui/core';
 
 import { setUser } from '~/store/modules/user/actions';
 
+import dataValidation from './dataValidation';
 import { Container } from './styles';
 
-function ClientForm(props, ref) {
+function ClientForm({ totalPrice }, ref) {
+	const history = useHistory();
 	const dispatch = useDispatch();
-
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [gender, setGender] = useState('');
-
-	useEffect(() => {
-		let persistedData = localStorage.getItem('persist:XBRAIN_SECRET');
-		if (persistedData) {
-			persistedData = JSON.parse(
-				JSON.parse(localStorage.getItem('persist:XBRAIN_SECRET')).user
-			);
-			setName(persistedData.name);
-			setEmail(persistedData.email);
-			setGender(persistedData.gender);
-		}
-	}, []);
+	const user = useSelector(state => state.user)
+	const [errors, setErrors] = useState([]);
+	const [name, setName] = useState(user.name);
+	const [email, setEmail] = useState(user.email);
+	const [gender, setGender] = useState(user.gender);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -37,24 +28,35 @@ function ClientForm(props, ref) {
 	}
 
 	useImperativeHandle(ref, () => ({
-		submit: () => dispatch(setUser({ name, email, gender })),
+		submit: async () => {
+			const validation = await dataValidation({ name, email, gender });
+			if (validation.isValid) {
+				console.log({ name, email, gender })
+				dispatch(setUser({ name, email, gender }));
+				history.push('/confirmation', { price: totalPrice });
+			} else {
+				setErrors(validation.error);
+			}
+		},
 	}));
 
 	return (
 		<Container onSubmit={handleSubmit}>
 			<TextField
 				placeholder="Nome do cliente aqui"
+				error={!!errors.find(error => error.path === 'name')}
+				helperText={errors.find(error => error.path === 'name')?.message}
 				label="Nome"
 				variant="outlined"
-				required
 				value={name}
 				onChange={e => setName(e.target.value)}
 			/>
 			<TextField
 				label="Email"
 				placeholder="Digite seu email aqui"
+				error={!!errors.find(error => error.path === 'email')}
+				helperText={errors.find(error => error.path === 'email')?.message}
 				variant="outlined"
-				required
 				value={email}
 				onChange={e => setEmail(e.target.value)}
 			/>
@@ -71,9 +73,8 @@ function ClientForm(props, ref) {
 					defaultValue={gender}
 					onChange={e => setGender(e.target.value)}
 				>
-					{/* <option value="" disabled>
-						Selecione
-					</option> */}
+					<option value="" disabled>
+					</option>
 					<option value="m">Masculino</option>
 					<option value="f">Feminino</option>
 					<option value="o">Outro</option>
