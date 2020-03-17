@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { addItem } from '~/store/modules/cart/actions';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import {
 	Container,
@@ -14,6 +15,7 @@ import {
 	Controller,
 	ControllerButton,
 	ControllerSubmit,
+	CancelButton
 } from './styles';
 
 export default function Product({ data }) {
@@ -78,7 +80,7 @@ export default function Product({ data }) {
 							<img src="/assets/baseline-add-24px.svg" alt="button icon" />
 						</ControllerButton>
 					</div>
-					<ControllerSubmit variant="contained" fullWidth type="submit">
+					<ControllerSubmit variant="contained" fullWidth type="submit" startIcon={<AddShoppingCartIcon />}>
 						ADICIONAR
 					</ControllerSubmit>
 				</Controller>

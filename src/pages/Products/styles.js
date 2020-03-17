@@ -30,7 +30,7 @@ export const ProductsGrid = styled.div`
 		grid-template-columns: repeat(1, 1fr);
 	}
 `;
-export const Client = styled.form`
+export const Client = styled.div`
 	margin-top: 24px;
 `;
 

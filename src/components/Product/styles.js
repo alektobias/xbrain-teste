@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -62,6 +62,7 @@ export const Controller = styled.form`
 		justify-content: space-between;
 		width: 100%;
 		margin-bottom: 16px;
+
 		.MuiButton-root {
 			background-color: ${props => props.theme.colors.secondary};
 			min-width: 43px;
