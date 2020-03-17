@@ -14,9 +14,9 @@ export default function user(state = INITIAL_STATE, action) {
 
 		switch (type) {
 			case 'persist/REHYDRATE': {
-				draft.name = payload.user.name;
-				draft.email = payload.user.email;
-				draft.gender = payload.user.gender;
+				draft.name = payload?.user.name;
+				draft.email = payload?.user.email;
+				draft.gender = payload?.user.gender;
 				break;
 			}
 			case Types.SET_USER: {
